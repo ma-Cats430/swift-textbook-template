@@ -2,7 +2,7 @@
 
 ## 使用した生成AIツール
 
-Gemini
+Gemini, ChatGPT
 
 ## 質問と回答の記録
 
@@ -52,11 +52,16 @@ Swiftの switch は、すべてのケースを網羅しているかを厳しく�
 ### Q2
 
 **質問：**
-
+137行目の下記のコードについて教えて<br>
+@Binding var selectedCategories: Set<Landmark.Category><br>
 **AIの回答の要点：**
-
+子ビュー側で「親ビューの状態を参照・更新するためのバインディング」を受け取るプロパティ宣言です。<br>
+具体的には、カテゴリ選択状態を表す集合 Set​<​Landmark​.​Category> を、親ビュー（Content​View）から双方向に受け渡します。<br>
+@​Binding は、親の状態（ここでは @​State var selected​Categories）への参照を子ビューに渡すためのプロパティラッパー<br>
+子ビュー Category​Filter は、このバインディングを通じて selected​Categories を読み書きできる<br>
 **自分の理解：**
-
+わざわざViewを分けて書く必要があるのか分からなかったが、分けた方が理解しやすいと思った。<br>
+Viewを分けて書くときに、親側の変数をどうしたら良いか迷っていたが、これを知って設計がしやすくなった。
 ### Q3
 
 **質問：**
