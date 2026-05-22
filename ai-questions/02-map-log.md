@@ -68,9 +68,35 @@ Viewを分けて書くときに、親側の変数をどうしたら良いか迷�
 ### Q3
 
 **質問：**
+105行目の下記のコードは何をしている？
+
+```Swift
+            Map(position: $cameraPosition) {
+                ForEach(filteredLandmarks) { landmark in
+                    Marker(
+                        landmark.name,
+                        systemImage: landmark.category.iconName,
+                        coordinate: landmark.coordinate
+                    )
+                    .tint(landmark.category.color)
+                }
+            }
+            .mapStyle(.standard(elevation: .realistic))
+```
 
 **AIの回答の要点：**
+このコードブロックは、SwiftUI の Map を使って地図を表示し、フィルタ済みのランドマークをマーカーとして描画、さらに地図の表示スタイルを「標準（リアルな標高表現付き）」に設定しています。<br/>
+For​Each(filtered​Landmarks) { landmark in ... }
+   • フィルタ後のランドマーク配列（選択されたカテゴリのみ）をループし、各ランドマークに対応するマーカーを作成します。<br/>
+Marker(landmark​.name, system​Image: landmark​.category​.icon​Name, coordinate: landmark​.coordinate)<br/>
+   • 各ランドマークの位置にマーカーを配置します。<br/>
+   • タイトルは landmark​.name、アイコンはカテゴリに紐づく SF Symbols 名（icon​Name）、座標は landmark​.coordinate を使用。<br/>
 
+• .tint(landmark​.category​.color)<br/>
+   • マーカーの色をカテゴリごとの色（寺社=赤、タワー=青、公園=緑）に設定します。<br/>
+
+• .map​Style(.standard(elevation: .realistic))<br/>
+   • 地図の見た目を標準マップに設定し、標高表現をリアルにします。建物や地形の立体感が強調され、視認性が向上します。<br/>
 **自分の理解：**
 
 （質問は何個でも追加してください。多ければ多いほど良いです。）
