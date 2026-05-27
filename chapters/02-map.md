@@ -268,7 +268,24 @@ struct Landmark: Identifiable {
 ### 地図の表示とカメラ制御
 
 ```swift
-// 該当部分のコードを抜粋して貼る
+@State private var cameraPosition: MapCameraPosition = .region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 35.6812, longitude: 139.7671),
+            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+        )
+    )
+
+Map(position: $cameraPosition) {
+                ForEach(filteredLandmarks) { landmark in
+                    Marker(
+                        landmark.name,
+                        systemImage: landmark.category.iconName,
+                        coordinate: landmark.coordinate
+                    )
+                    .tint(landmark.category.color)
+                }
+            }
+            .mapStyle(.standard(elevation: .realistic))
 ```
 
 **何をしているか：**
@@ -282,7 +299,14 @@ struct Landmark: Identifiable {
 ### マーカーの表示
 
 ```swift
-// 該当部分のコードを抜粋して貼る
+ForEach(filteredLandmarks) { landmark in
+                    Marker(
+                        landmark.name,
+                        systemImage: landmark.category.iconName,
+                        coordinate: landmark.coordinate
+                    )
+                    .tint(landmark.category.color)
+                }
 ```
 
 **何をしているか：**
@@ -296,7 +320,9 @@ struct Landmark: Identifiable {
 ### フィルター機能
 
 ```swift
-// 該当部分のコードを抜粋して貼る
+var filteredLandmarks: [Landmark] {
+        Landmark.sampleData.filter { selectedCategories.contains($0.category) }
+    }
 ```
 
 **何をしているか：**
