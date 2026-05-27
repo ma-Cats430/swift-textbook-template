@@ -1,11 +1,10 @@
 # 第2章：地図アプリの基本
 
-> 執筆者：（氏名）
-> 最終更新：YYYY-MM-DD
+> 執筆者：原翔諭
+> 最終更新：2026-05-27
 
 ## この章で学ぶこと
 
-（この章で扱うトピックの概要を2〜3行で書く。自分の言葉で。）
 MapKitを使用してアプリ内にマップを出して、設定した位置にマーカーを配置する方法を学ぶ。
 
 ## 模範コードの全体像
@@ -224,7 +223,35 @@ struct LandmarkCard: View {
 ### データモデル（ランドマーク構造体）
 
 ```swift
-// 該当部分のコードを抜粋して貼る
+struct Landmark: Identifiable {
+    let id = UUID()
+    let name: String
+    let description: String
+    let coordinate: CLLocationCoordinate2D
+    let category: Category
+
+    enum Category: String, CaseIterable {
+        case temple = "寺社"
+        case tower = "タワー"
+        case park = "公園"
+
+        var iconName: String {
+            switch self {
+            case .temple: return "building.columns"
+            case .tower: return "antenna.radiowaves.left.and.right"
+            case .park: return "leaf"
+            }
+        }
+
+        var color: Color {
+            switch self {
+            case .temple: return .red
+            case .tower: return .blue
+            case .park: return .green
+            }
+        }
+    }
+}
 ```
 
 **何をしているか：**
