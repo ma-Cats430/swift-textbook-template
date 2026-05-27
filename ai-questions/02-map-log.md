@@ -10,7 +10,7 @@ Gemini, ChatGPT
 
 **質問：**
 このコードのプロトコルと、switchについて教えて
-```SwiftUI
+```Swift
 enum Category: String, CaseIterable {
         case temple = "寺社"
         case tower = "タワー"
