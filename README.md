@@ -18,7 +18,7 @@
 
 | 章 | テーマ | ファイル | 状態 |
 |---|--------|---------|------|
-| 第1章 | WebAPIの基本 | [chapters/01-webapi.md](chapters/01-webapi.md) | 90% |
+| 第1章 | WebAPIの基本 | [chapters/01-webapi.md](chapters/01-webapi.md) | DONE |
 | 第2章 | 地図アプリの基本 | [chapters/02-map.md](chapters/02-map.md) | 50% |
 | 第3章 | カメラの利用 | [chapters/03-camera.md](chapters/03-camera.md) | 25% |
 | 第4章 | データの永続化 | [chapters/04-data-persistence.md](chapters/04-data-persistence.md) | 未着手 |
