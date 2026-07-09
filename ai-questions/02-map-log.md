@@ -101,6 +101,68 @@ Marker(landmark​.name, system​Image: landmark​.category​.icon​Name, co
 
 （質問は何個でも追加してください。多ければ多いほど良いです。）
 
+### Q4
+
+**質問:**
+下記ののコードはなぜわざわざextensionして別々に書いているのですか
+```Swift
+struct Landmark: Identifiable {
+    let id = UUID()
+    let name: String
+    let description: String
+    let coordinate: CLLocationCoordinate2D
+    let category: Category
+
+    enum Category: String, CaseIterable {
+        case temple = "寺社"
+        case tower = "タワー"
+        case park = "公園"
+
+        var iconName: String {
+            switch self {
+            case .temple: return "building.columns"
+            case .tower: return "antenna.radiowaves.left.and.right"
+            case .park: return "leaf"
+            }
+        }
+
+        var color: Color {
+            switch self {
+            case .temple: return .red
+            case .tower: return .blue
+            case .park: return .green
+            }
+        }
+    }
+}
+```
+```Swift
+extension Landmark {
+    static let sampleData: [Landmark] = [
+        Landmark(
+            name: "浅草寺",
+            description: "東京都内最古の寺院。雷門が有名。",
+            coordinate: CLLocationCoordinate2D(latitude: 35.7148, longitude: 139.7967),
+            category: .temple
+        ),
+        Landmark(
+            name: "東京タワー",
+            description: "1958年に完成した高さ333mの電波塔。",
+            coordinate: CLLocationCoordinate2D(latitude: 35.6586, longitude: 139.7454),
+            category: .tower
+        )
+    ]
+}
+```
+
+
+**AIの解答の要点**
+「型そのものの定義」と「具体的なデータ」を分けるため。<br>
+初期化（イニシャライザ）の自動生成を守るため。
+
+**自分の理解：**
+
+
 ## 今日の質問を振り返って
 
 （どんな質問が良い質問だったか。生成AIの回答で間違いや不正確な部分はあったか。次回はどんな質問をしてみたいか。）
