@@ -299,17 +299,23 @@ SwiftUIでは「状態（データ）の変化に合わせて画面が自動更�
 ### マーカーの表示
 
 ```swift
-ForEach(filteredLandmarks) { landmark in
-                    Marker(
-                        landmark.name,
-                        systemImage: landmark.category.iconName,
-                        coordinate: landmark.coordinate
-                    )
-                    .tint(landmark.category.color)
-                }
+Map(position: $cameraPosition, selection: $selectedLandmark) {
+    ForEach(filteredLandmarks) { landmark in
+        Marker(
+            landmark.name,
+            systemImage: landmark.category.iconName,
+            coordinate: landmark.coordinate
+        )
+        .tint(landmark.category.color)
+        .tag(landmark)
+    }
+}
+.mapStyle(.standard(elevation: .realistic))
 ```
 
 **何をしているか：**
+
+自分で選んだ場所、フィルターされたLandMark型配列の中身をForEachで1件ずつ取り出し、それぞれのプロパティをMarker()に設定してピンを表示している。
 
 **なぜこう書くのか：**
 
@@ -320,12 +326,16 @@ ForEach(filteredLandmarks) { landmark in
 ### フィルター機能
 
 ```swift
+@State private var selectedCategories: Set<Landmark.Category> = Set(Landmark.Category.allCases)
 var filteredLandmarks: [Landmark] {
-        Landmark.sampleData.filter { selectedCategories.contains($0.category) }
-    }
+    Landmark.sampleData.filter { selectedCategories.contains($0.category) }
+}
 ```
 
 **何をしているか：**
+
+CategoryFilterの画面でカテゴリーを絞ると、selectedCategoriesに絞られたカテゴリーが入る。<br>
+Landmark構造体のsampleDataプロパティの配列の中から、selectedCategoriesに含まれてるカテゴリーのものだけがfilteredLandmarksに入る仕組み。
 
 **なぜこう書くのか：**
 
